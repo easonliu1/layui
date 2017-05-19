@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>短信发送记录</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+		<style>
+			.layui-table td, .layui-table th{ text-align: center;}
+		</style>
+	</head>
+
+	<body style="min-width:1200px;">
+		<div class="layui-form">
+			<div class="layui-form-item" style="margin-bottom: 10px;">
+				<div class="layui-input-inline template">
+					<select name="template">
+						<option value="">--短信模板--</option>
+						<option value="1">模板1</option>
+						<option value="2">模板2</option>
+						<option value="3">模板3</option>
+						<option value="4">模板4</option>
+					</select>
+				</div>
+				<div class="layui-input-inline merchant">
+					<select name="merchant">
+						<option value="">--商户--</option>
+						<option value="1">商户1</option>
+						<option value="2">商户2</option>
+						<option value="3">商户3</option>
+					</select>
+				</div>
+				<div class="layui-input-inline app">
+					<select name="app">
+						<option value="">--公众号--</option>
+						<option value="1">公众号1</option>
+						<option value="2">公众号2</option>
+						<option value="3">公众号3</option>
+					</select>
+				</div>
+				<div class="layui-input-inline sendstatus">
+					<select name="sendstatus">
+						<option value="">--发送状态--</option>
+						<option value="1">发送中</option>
+						<option value="2">发送成功</option>
+						<option value="3">发送失败</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-inline">
+					<input name="start-time" class="layui-input" placeholder="--发送时间1--" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})" />
+				</div>
+				<div class="layui-input-inline">
+					<input name="end-time" class="layui-input" placeholder="--发送时间2--" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})" />
+				</div>
+				<div class="layui-input-inline" style="width: 250px;">
+					<input type="text" class="layui-input" name="keyword" placeholder="关键字(手机号、sid)" />
+				</div>
+				<button class="layui-btn query-btn">查询</button>
+				<a class="layui-btn layui-btn-primary reset-btn" href="smsrecord.html">重置</a>
+			</div>
+		</div>
+		<table class="layui-table">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>商户</th>
+					<th>公众号</th>
+					<th>手机号</th>
+					<th>短信内容</th>
+					<th>发送状态</th>
+					<th>发送时间</th>
+					<th>sid</th>
+					<th>返回值</th>
+					<th>返回时间</th>
+				</tr>
+			</thead>
+			<tbody id="sms-record-list">
+				<tr>
+					<td>1</td>
+					<td>微易科技</td>
+					<td>微易互动平台</td>
+					<td>15251253526</td>
+					<td>xxx</td>
+					<td style="color:#10a70c;">发送中</td>
+					<td>2017-05-03 11:00:00</td>
+					<td>135268545244882356</td>
+					<td>xx</td>
+					<td>2017-05-03 12:00:00</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>xxx</td>
+					<td>xxx</td>
+					<td>15251253526</td>
+					<td>xxx</td>
+					<td style="color:#d03d36;">发送成功</td>
+					<td>2017-05-03 11:00:00</td>
+					<td>135268545244882356</td>
+					<td>xx</td>
+					<td>2017-05-03 12:00:00</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>xxx</td>
+					<td>xxx</td>
+					<td>15251253526</td>
+					<td>xxx</td>
+					<td style="color:#999;">发送失败</td>
+					<td>2017-05-03 11:00:00</td>
+					<td>135268545244882356</td>
+					<td>xx</td>
+					<td>2017-05-03 12:00:00</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="page" style="text-align: center;"></div>
+		<div class="nodata layui-hide">没有查询到符合要求的信息！</div>
+	</body>
+	<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+	<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+	<script>
+		layui.use(['form', 'element', 'laydate', 'layer', 'laypage'], function() {
+			var form = layui.form();
+			var	element = layui.element;
+			var	laydate = layui.laydate;
+			var	layer = layui.layer;
+			var	laypage = layui.laypage;
+			var pageCount = 5;
+				
+			laypage({
+				cont: 'page',
+				pages: pageCount, //总页数
+				groups: 5, //连续显示分页数
+				skip: true,
+				jump: function(obj,first) {
+					if(!first){
+						layer.msg(obj.curr);
+					}
+				}
+			})
+				
+		})
+	</script>
+
+</html>

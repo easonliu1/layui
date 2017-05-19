@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>编辑短信信息</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+		<style>
+			.layui-table td, .layui-table th{ text-align: center;}
+		</style>
+	</head>
+
+	<body style="min-width:1200px;">
+		<blockquote class="layui-elem-quote">短信编辑</blockquote>
+		<div class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">模板名称</label>
+				<div class="layui-input-inline" style="width:60%;">
+					<input type="text" name="templatename" id="templatename" value="" class="layui-input" />
+				</div>
+				<div class="layui-form-mid layui-word-aux">(限20字符)</div>
+			</div>
+			<div class="layui-form-item">
+	            <label class="layui-form-label">短信内容</label>
+	            <div class="layui-input-block">
+	                <textarea class="layui-textarea" name="content" placeholder="请输入内容" style="width:90%; min-height:200px;"></textarea>
+	            </div>
+	        </div>
+	        <div class="layui-form-item">
+				<label class="layui-form-label">模板状态</label>
+				<div class="layui-input-inline">
+					<label class="layui-form-label" style="text-align:left; padding: 9px 10px; font-size:1.2em; color: #999;">未备案</label>
+				</div>
+			</div>
+	        <div class="layui-form-item">
+	            <label class="layui-form-label">备注</label>
+	            <div class="layui-input-inline" style="width:80%;">
+	                <input type="text" name="remarks" class="layui-input">
+	            </div>
+	        </div>
+	        <div style="margin: 30px 0; text-align: center;">
+				<button class="layui-btn" lay-submit lay-filter="demo1" id="submit-btn">立即提交</button>
+				<a class="layui-btn layui-btn-primary back-btn" href="smstemplate.html">返回</a>
+				<button class="layui-btn layui-btn-primary" id="reset-btn">重置</button>
+			</div>
+		</div>
+	</body>
+	<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+	<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+	<script>
+		layui.use(['form', 'element', 'layer'], function() {
+			var form = layui.form();
+			var	element = layui.element;
+			var	layer = layui.layer;
+			
+			var templateId = location.search.substr(1).split('=')[1];
+			//通过id获取当前消息内容，并将内容显示在页面上
+			
+			//提交按钮操作
+			$('#submit-btn').on('click', function(){
+				var name = $('input[name=templatename]').val();
+				var content = $('textarea[name=content]').val();
+				var remarks = $('input[name=remarks]').val();
+				layer.msg('模板名称：' + name + '<br />内容：' + content + '<br />备注：' + remarks);
+				//将当前数据提交到后台
+			})
+			
+			//重置按钮操作
+			$('#reset-btn').on('click', function(){
+				//所有的值为空
+				$('input[name=templatename],textarea[name=content],input[name=remarks]').val('');
+			})
+		})
+	</script>
+
+</html>

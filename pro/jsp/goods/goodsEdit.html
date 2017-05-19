@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>添加产品</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../res/css/Layuiglobal.css">
+    <link rel="stylesheet" href="../../res/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+	<style>
+		.encl_box{
+			padding-top:20px;
+		}
+		.ri_btn{
+			float:right;
+			display: inline-block;
+		}
+		.pagkt_icon{
+			border:1px solid #d03d36;
+			color:#d03d36;
+			line-height:28px;
+			margin-top:5px;
+			margin-right:10px;
+			padding:0 8px;
+			display: inline-block;
+			border-radius:5px;
+			float:left;
+		}
+		.layui-elem-quote{
+			margin-bottom:15px;	
+		}
+		.site-demo-upload, .site-demo-upload img{
+			border-radius: 10px;
+			width:140px;
+			height:140px;
+		}
+	</style>
+	<body>
+		<div class="encl_box">
+			<form action="" class="layui-form" style="padding:0 15px;">
+			 	
+		        <p class="layui-elem-quote">基本设置</p>
+		        <div class="layui-form-item">
+		            <label for="" class="layui-form-label">产品名称：</label>
+		            <div class="layui-input-block" >
+		                <input type="text" name="name" lay-verify="" autocomplete="off" placeholder=" " class="layui-input">
+		            </div>
+		        </div>
+		         <div class="layui-form-item">
+		            <label for="" class="layui-form-label">产品主图：</label>
+		            <div class="site-demo-upload layui-inline">
+				        <div class="site-demo-upbar">
+				            <input type="file" name="file" class="layui-upload-file" id="test">
+				        </div>
+				        <img src="../../res/images/haibaokc.jpg" id="demo1" >
+				    </div>
+		        </div>
+		         <div class="layui-form-item">
+		            <label for="" class="layui-form-label">产品价格：</label>
+		             <div class="layui-input-inline">
+		                <input type="text" name="price" lay-verify="price" autocomplete="off" placeholder="" class="layui-input">
+		            </div>
+		        </div>
+		        <div class="layui-form-item layui-form-text">
+		            <label for="" class="layui-form-label">产品描述：</label>
+		            <div class="layui-input-block">
+		                <textarea class="layui-textarea" placeholder="请输入内容" style="min-height:200px;" name="desc"></textarea>
+		            </div>
+		        </div>
+		       
+		     	<div class="layui-form-item layui-form-text">
+		            <label for="" class="layui-form-label">产品详情：</label>
+		            <div class="layui-input-block" >
+		                <textarea name="content" class="layui-textarea layui-hide" lay-verify="content" id="LAY_demo_editor"></textarea>
+		            </div>
+		        </div>
+		        <div class="layui-form-item">
+		            <label for="" class="layui-form-label">可用天数：</label>
+		             <div class="layui-input-inline">
+		                <input type="text" name="usableDays" lay-verify="price" autocomplete="off" placeholder="" class="layui-input">
+		            </div>
+		        </div>
+		        <div class="layui-form-item">
+		            <label for="" class="layui-form-label">最大次数：</label>
+		             <div class="layui-input-inline">
+		                <input type="text" name="maxNum" lay-verify="price" autocomplete="off" placeholder="" class="layui-input">
+		            </div>
+		        </div>
+	       		<div class="layui-form-item" style="margin-top:40px;">
+		            <div class="layui-input-block" style="margin-left:120px;">
+		                <a class="layui-btn" lay-submit="" lay-filter="demo1" href="goodslist.html">立即提交</a>
+		                <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+		                <button class="layui-btn layui-btn-primary" onclick="history.go(-1)">返回</button>
+		            </div>
+		        </div>
+			</form>
+    	</div>
+	</body>
+	<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../res/plugins/datas/nav.js" ></script>
+    
+    <script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+     <script>
+        layui.use(['form','layedit','laydate'],function(){
+            var form = layui.form()
+            var layer = layui.layer                   //初始化弹窗组件
+            var laydate = layui.laydate             //初始化日期组件
+            var layedit = layui.layedit             //初始化富文本
+            var editIndex = layedit.build("LAY_demo_editor")        //实例化一个富文本
+
+            form.verify({
+                title: function(value){
+                    if(value.length < 5){
+                        return '标题至少得5个字符啊';
+                    }
+                }
+                ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+                ,content: function(value){
+                layedit.sync(editIndex);
+                }
+            });
+
+            form.on('submit(demo1)', function(data){     //监听提交事件并打印
+                console.log(data)
+                /*layer.alert(JSON.stringify(data.field),{
+                    title:"最终提交的信息"*/
+                })
+            
+             $.post('../',function(res){
+             	$('input[name=name]').val(res.data.name);
+             });
+        })
+        
+     
+    </script>
+</html>

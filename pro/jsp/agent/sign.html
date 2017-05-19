@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,p,ul,li,ol,img,h1,h2,h3,h4,h5,h6{
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+        }
+        
+        .main{
+            display: flex;
+        }
+        
+        .main .box{
+            
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            text-align: center;
+            
+        }
+        .main .box .verifyCode{
+            width: 230px;
+            margin-top: 20px;
+        }
+        .main .box h3{
+            text-align: center;
+            padding: 4px 0;
+            color: #333;
+            background-color: #eee;
+            border-radius: 6px 6px 0 0 ;
+        }
+        .main .box form{
+            margin: 0 80px;
+            margin-top: 20px;
+        }
+        form input{
+            display: block;
+            width: 240px;
+            height: 30px;
+            padding: 3px;
+            border-radius: 3px;
+            margin-top: 6px;
+            background: none;
+            border: none;
+            border: 1px solid #e6e6e6;
+        }
+        .main .box .submitBox button{
+            width: 250px;
+            background: none;
+            border: none;
+            background-color: #1AA094;
+            border-radius: 3px;
+            color: #fff;
+            padding: 8px 0;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .main .box .submitBox button:hover{
+            opacity: 0.9;
+        }
+        .tip p{
+            color: #666;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="mediaBox">
+            <img src="../../res/images/gift.jpg" alt="">
+        </div>
+        <div class="formBox">
+            <div class="box">
+                <h3>登录中心</h3>
+                <form action="">
+
+                    <input type="text" placeholder="请输入用户名">
+                    <input type="text" placeholder="请输入密码">
+                    <input type="text" placeholder="请输入验证码">
+                    
+                </form>
+                <div class="tip">
+                    <p> ( 请用微信扫下面的二维码获取登录验证码 ) </p>
+                    <img src="../../res/images/code.png" alt="" class="verifyCode">
+                </div>
+                <div class="submitBox">
+                    <button>登录</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

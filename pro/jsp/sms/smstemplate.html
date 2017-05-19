@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>短信模板</title>
+	<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+	<style>
+		.layui-table td,
+		.layui-table th {
+			text-align: center;
+		}
+		
+		.ri_btn {
+			float: right;
+			margin-right: 10px;
+		}
+		
+		.ri_btn::after {
+			content: '';
+			clear: both;
+		}
+	</style>
+</head>
+
+<body style="min-width:1200px;">
+	<div class="layui-form">
+		<div class="layui-form-item">
+			<div class="layui-input-inline status">
+				<select name="status">
+						<option value="">--状态--</option>
+						<option value="1">未备案</option>
+						<option value="2">备案中</option>
+						<option value="3">已备案</option>
+					</select>
+			</div>
+			<div class="layui-input-inline" style="width: 300px;">
+				<input type="text" class="layui-input" name="keyword" placeholder="关键字(模板名称、内容、备注)" />
+			</div>
+			<button class="layui-btn query-btn">查询</button>
+			<a class="layui-btn layui-btn-primary reset-btn" href="smstemplate.html">重置</a>
+			<div class="ri_btn">
+				<a href="addtenant.html" class="layui-btn" id="add-activity"><i class="layui-icon">&#xe608;</i> 添加活动</a>
+			</div>
+		</div>
+	</div>
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>模板名称</th>
+				<th>短信模板内容</th>
+				<th>模板状态</th>
+				<th>备注</th>
+				<th>修改人</th>
+				<th>修改时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="sms-template-list">
+			<tr data-id="1">
+				<td>1</td>
+				<td>名称1</td>
+				<td>内容1</td>
+				<td style="color:#999;">未备案</td>
+				<td>xxxxx</td>
+				<td>张三</td>
+				<td>2017-05-03 11:00:00</td>
+				<td>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+				</td>
+			</tr>
+			<tr data-id="2">
+				<td>2</td>
+				<td>名称2</td>
+				<td>内容2</td>
+				<td style="color:#10a70c;">备案中</td>
+				<td>xxxxx</td>
+				<td>张三</td>
+				<td>2017-05-03 11:00:00</td>
+				<td>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+				</td>
+			</tr>
+			<tr data-id="3">
+				<td>3</td>
+				<td>名称3</td>
+				<td>内容3</td>
+				<td style="color:#d03d36;">已备案</td>
+				<td>xxxxx</td>
+				<td>张三</td>
+				<td>2017-05-03 11:00:00</td>
+				<td>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+				</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>名称4</td>
+				<td>内容4</td>
+				<td style="color:#999;">未备案</td>
+				<td>xxxxx</td>
+				<td>张三</td>
+				<td>2017-05-03 11:00:00</td>
+				<td>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="page" style="text-align: center;"></div>
+	<div class="nodata layui-hide">没有查询到符合要求的信息！</div>
+</body>
+<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+<script>
+	layui.use(['form', 'element', 'laydate', 'layer', 'laypage'], function () {
+		var form = layui.form();
+		var element = layui.element;
+		var laydate = layui.laydate;
+		var layer = layui.layer;
+		var laypage = layui.laypage;
+		var pageCount = 5;
+
+		//双击表格行，可以打开编辑页面
+		$('.editFn').on('click', function () {
+			var templateId = $(this).parents("tr").attr('data-id');
+			window.location.href = 'editsmstemplate.html?id=' + templateId;
+		});
+		
+		$('.delFn').on('click', function () {
+			var templateId = $(this).parents("tr").attr('data-id');
+			layer.confirm("确定要删除吗",function(){
+				layer.msg("已删除")
+			})
+		});
+
+
+		//查询按钮操作
+		$('.query-btn').on('click', function () {
+			var status = $('select[name=status]').val();
+			var keyword = $('input[name=keyword]').val();
+			layer.msg('状态：' + status + ', 关键字：' + keyword);
+		});
+
+		laypage({
+			cont: 'page',
+			pages: pageCount, //总页数
+			groups: 5, //连续显示分页数
+			skip: true,
+			jump: function (obj, first) {
+				if (!first) {
+					layer.msg(obj.curr);
+				}
+			}
+		})
+
+	})
+</script>
+
+</html>

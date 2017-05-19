@@ -1,0 +1,329 @@
+/*积分商城*/
+.ringicon {
+  font-size: 2.96rem;
+  line-height: 2.96rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+}
+.insideicon {
+  font-size: 2.96rem;
+  line-height: 2.96rem;
+  top: 0;
+  left: 0;
+  position: absolute;
+  color: #fff;
+}
+.complex_icon {
+  position: relative;
+  text-align: center;
+  background: -webkit-linear-gradient(left bottom, #ffc764, #feb636);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(left bottom, #ffc764, #feb636);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(left bottom, #ffc764, #feb636);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(left bottom, #ffc764, #feb636);
+  display: inline-block;
+  width: 2.96rem;
+  height: 2.96rem;
+  border-radius: 50%;
+}
+.intefral_flex {
+  padding:1.1rem 0 0.7rem;
+  overflow: hidden;
+}
+.intefral_flex a {
+  width: 33%;
+  text-align: center;
+  float: left;
+  display: block;
+}
+.intefral_flex a:nth-of-type(2) .complex_icon {
+  background: -webkit-linear-gradient(left bottom, #61dfae, #3dd096);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(left bottom, #61dfae, #3dd096);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(left bottom, #61dfae, #3dd096);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(left bottom, #61dfae, #3dd096);
+}
+.intefral_flex a:nth-of-type(3) .complex_icon {
+  background: -webkit-linear-gradient(left bottom, #fb8568, #f75b34);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(left bottom, #fb8568, #f75b34);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(left bottom, #fb8568, #f75b34);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(left bottom, #fb8568, #f75b34);
+}
+.intefral_flex span {
+  display: block;
+  color: #333;
+  font-size: 1.04rem;
+  line-height:2.4rem;
+}
+.vertical_bar {
+  width: 1px;
+  display: inline-block;
+  float: left;
+  height: 3rem;
+  margin-top: 1rem;
+  border-left: 1px solid #ffba87;
+}
+.award_box {
+  padding: 1.6rem;
+  overflow: hidden;
+  clear: both;
+}
+.awardbos {
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  float: left;
+  text-align: center;
+  padding: 1.36rem 0.32rem 0.8rem;
+  width: calc(47.8%);
+  background-color: #fff;
+  margin-bottom: 1.2rem;
+}
+.awardbos:nth-of-type(2n+1) {
+  float: left;
+}
+.awardbos:nth-of-type(2n) {
+  float: right;
+}
+.awardbos h4 {
+  font-size: 0.96rem;
+  color: #333;
+  margin-bottom: 0.72rem;
+}
+.awardbos h4 i {
+  color: #ee6600;
+  margin-left: 0.2rem;
+}
+.awardimg {
+  display: block;
+  height: 4.2rem;
+  width: 100%;
+  background-image: url(../images/wximg/redpagket.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+.awardbos:nth-of-type(3) .awardimg {
+  background-image: url(../images/wximg/apple.png);
+}
+.awardbos:nth-of-type(4) .awardimg {
+  background-image: url(../images/wximg/apple.png);
+}
+.or_btn {
+  font-size: 1.04rem;
+  color: #fff;
+  background-color: #ee6600;
+  padding: 0 1rem;
+  border-radius: 0.3rem;
+  line-height: 1.52rem;
+  display: inline-block;
+  margin-top: 0.72rem;
+}
+.hint {
+  display: block;
+  font-weight: normal;
+  text-align: center;
+  color: #999;
+  font-size: 0.7rem;
+  margin-top: 0.32rem;
+}
+.lucky_box {
+  background-image: url(../images/wximg/buntingbck.png);
+  background-repeat: no-repeat;
+  background-position: top center;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 1rem 0;
+  position: relative;
+}
+.luckylist {
+  float: right;
+  background: url(../images/wximg/lottery/listbck.png) no-repeat top left;
+  -webkit-background-size: contain;
+  background-size: contain;
+  width: 42%;
+  text-align: center;
+  padding: 0 2px 0.6rem;
+}
+.luckylist h4 {
+  color: #ff8308;
+  font-size: 1.1rem;
+  line-height: 2.4rem;
+  border-bottom: 1px dotted #ff8308;
+  margin-top: 0.4rem;
+  background: url(../images/wximg/lottery/hbck.png) no-repeat top left;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+.luckylist ul {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dotted #ff8308;
+}
+.luckylist button{
+	margin-top:0.3rem;
+}
+.luckylist strong{
+	margin-top:0.2rem;
+}
+.luckylist ul li {
+  color: #c7561e;
+  font-size: 0.8rem;
+  line-height: 1.3rem;
+}
+.luckylistbos {
+  background: url(../images/wximg/lottery/list_bck.png) repeat-y top left;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  padding-bottom:0.3rem;
+}
+.luvkyt_bck {
+  background: url(../images/wximg/lottery/listbck1.png) no-repeat top left;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  height: 0.6rem;
+}
+.luvkym_bck {
+  position: relative;
+}
+.luvkymbos1 {
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: #ff9d17;
+  position: absolute;
+  top: -0.4rem;
+  left: -0.4rem;
+}
+.luvkymbos2 {
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: #ff6c03;
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+}
+.luvkymbos3 {
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+   background: -webkit-linear-gradient(top, #ff9412, #ff8b12);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(top, #ff9412, #ff8b12);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(top, #ff9412, #ff8b12);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(top, #ff9412, #ff8b12);
+  position: absolute;
+  top: -0.4rem;
+  left: -0.4rem;
+}
+/*大转盘*/
+.g-lottery-box {
+  width: 11.36rem;
+  height: 11.36rem;
+  position: relative;
+  background: url(../images/wximg/lottery/ly-plate-c.gif) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+.g-lottery-box .g-lottery-img {
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+  background: url(../images/wximg/lottery/bg-lottery.png) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+  left: 0.68rem;
+  top: 0.68rem;
+}
+.g-lottery-box .playbtn {
+  width: 6rem;
+  height: 6rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: url(../images/wximg/lottery/playbtn.png) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+
+.g-lottery-box {
+  float: left;
+}
+@media (min-width: 321px) and (max-width: 340px) {
+  .lucky_box {
+    padding: 2rem 0.6rem 0;
+  }
+}
+/*弹框*/
+.pop_upbox {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.popbos {
+  width: 80%;
+  margin-top: 30%;
+  margin-left: 10%;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  padding: 2rem 0.4rem;
+  text-align: center;
+}
+.popbos p {
+  font-size: 0.96rem;
+  line-height: 2rem;
+}
+.colour1 {
+  width: 0.8rem;
+  height: 1.08rem;
+  display: block;
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  background: url(../images/wximg/lottery/colour1.png) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+.colour2 {
+  width: 1.2rem;
+  height: 0.44rem;
+  display: block;
+  position: absolute;
+  top: 60%;
+  left: 3%;
+  background: url(../images/wximg/lottery/colour2.png) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}
+.colour3 {
+  width: 4.48rem;
+  height: 6.16rem;
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 38%;
+  background: url(../images/wximg/lottery/colour3.png) no-repeat center;
+  -webkit-background-size: contain;
+  background-size: contain;
+}

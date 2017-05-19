@@ -1,0 +1,354 @@
+@charset "utf-8";
+/*rem单位算法标准:以宽640的设计图为标准,1px=1/25rem;(注:1px的border仍以px为单位,如果换成rem为单位有些手机不会显示);*/
+/* 禁用iPhone中Safari的字号自动调整 */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* 去除iPhone中默认的input样式 */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input {
+  -webkit-appearance: none;
+  resize: none;
+}
+/* 取消链接高亮  */
+body,
+div,
+ul,
+li,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select,
+p,
+dl,
+dt,
+dd,
+a,
+img,
+button,
+form,
+table,
+th,
+tr,
+td,
+tbody,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* 设置HTML5元素为块 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+/* 图片自适应 */
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  /* ie8 */
+  -ms-interpolation-mode: bicubic;
+  /*为了照顾ie图片缩放失真*/
+}
+/* 初始化 */
+body,
+div,
+ul,
+li,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select,
+p,
+dl,
+dt,
+dd,
+a,
+img,
+button,
+form,
+table,
+th,
+tr,
+td,
+tbody,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+body {
+  font-family: '微软雅黑', Microsoft YaHei, Tahoma, Arial, sans-serif;
+  color: #1b1b1f;
+  background-color: #F1F3F2;
+}
+em,
+i {
+  font-style: normal;
+}
+strong {
+  font-weight: normal;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  height: 0;
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+a {
+  text-decoration: none;
+  color: #969696;
+  font-family: Microsoft YaHei, Tahoma, Arial, sans-serif;
+}
+ul,
+ol {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-family: Microsoft YaHei;
+}
+img {
+  border: none;
+  vertical-align: middle;
+}
+.wrap {
+  min-width: 320px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+/* 把手机分为 3 档  */
+/* 320以下一档,  320  -  480 一档    480 以上的是一档  */
+@media screen and (max-width: 321px) {
+  html {
+    font-size: 13px;
+  }
+}
+@media (min-width: 321px) and (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  html {
+    font-size: 18px;
+  }
+}
+/*占位符颜色*/
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #999;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #999;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #999;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+/*一些通用的样式*/
+/*要突出显示的文字内容颜色*/
+.ps {
+  color: #CC0000;
+}
+.blue {
+  color: #42A5F5;
+}
+.pink {
+  color: #f46;
+}
+.prominent {
+  color: #FF9900;
+}
+.gray {
+  color: #7d7d7d;
+}
+.h60 {
+  height: 2.4rem;
+}
+.h100 {
+  height: 4rem;
+}
+/*单选按钮*/
+.radio {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 0.96rem;
+  height: 0.96rem;
+  background-color: #fff;
+  display: inline-block;
+}
+.radio.active {
+  border: none;
+  border-radius: 50%;
+  width: 0.96rem;
+  height: 0.96rem;
+  background-color: #42A5F5;
+  position: relative;
+}
+.radio.active:after {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -5px;
+  margin-top: -5px;
+  border-radius: 50%;
+}
+@media screen and (max-width: 399px) {
+  .radio.active {
+    width: 14px;
+    height: 14px;
+  }
+  .radio.active:after {
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    margin-top: -2px;
+  }
+}
+@media (min-width: 400px) and (max-width: 480px) {
+  .radio.active {
+    width: 16px;
+    height: 16px;
+  }
+  .radio.active:after {
+    margin-left: -3px;
+    margin-top: -3px;
+  }
+}
+/*字体图标定义*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/iconfont.eot');
+  src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */ url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('../fonts/iconfont.svg#iconfont') format('svg');
+  
+  /* IE9*/
+  /* iOS 4.1- */
+}
+.iconfont {
+  font-family: "iconfont";
+  font-size: 16px;
+  line-height: 18px;
+  font-style: normal;
+}
+/*---------------------页面底部导航---------------------*/
+.public_footer {
+  position: fixed;
+  height: 4rem;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #F2F2F2;
+  display: box;              /* OLD - Android 4.4- */
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */  
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  text-align: center;
+  -moz-box-shadow:-2px 2px 5px #ccc; 
+    -webkit-box-shadow: -2px 2px 5px #ccc;
+    box-shadow: 0 0px 7px #ccc;
+}
+.public_footer > a {
+ -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;         /* OLD - Firefox 19- */
+  -webkit-flex: 1;          /* Chrome */
+  -ms-flex: 1;      
+  flex: 1;
+  width:33%;
+  height:100%;
+  background: rgba(255, 255, 255, 0.7) center 32% no-repeat;
+  position: relative;
+}
+.public_footer i{
+	display: block;
+	font-size:1.3rem !important;
+	margin-top:0.8rem;
+}
+
+.public_footer .footer_item span {
+  display: block;
+  width: 100%;
+  font-size: 0.8rem;
+  margin-top:0.3rem;
+  color: #595757;
+}
+

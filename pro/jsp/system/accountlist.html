@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+    <style>
+        .userPic{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .ri_btn {
+			float: right;
+			margin-right: 10px;
+		}
+		
+		.ri_btn::after {
+			content: '';
+			clear: both;
+		}
+    </style>
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>账户列表</legend>
+    </fieldset>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            
+            <div class="layui-input-inline">
+                <select name="modules" lay-verify="required" lay-search="">
+                    <option value="">状态</option>
+                    <option value="1">layer</option>
+                    <option value="2">form</option>
+                    <option value="3">layim</option>
+                    <option value="4">element</option>
+                    
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name=""  placeholder="输入昵称、姓名或帐号" autocomplete="off" class="layui-input">
+            </div>
+            
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="query">查询</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+            <div class="ri_btn">
+				<a href="editaccount.html?id=0" class="layui-btn" id="add-activity"><i class="layui-icon">&#xe608;</i> 添加用户</a>
+			</div>
+        </div>
+        <table class="layui-table activty-manage" lay-even>
+            <thead>
+                <tr>
+                    <th style="min-width:20px;">No</th>
+                    <th style="min-width:84px;">微信</th>
+                    <th style="min-width:60px;">姓名</th>
+                    <th style="min-width:106px;">角色</th>
+                    <th style="min-width:156px;">最后登录时间</th>
+                    <th style="min-width:164px;">登录时间</th>
+                    <th style="min-width:100px">状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="activity-list">
+                <tr>
+                    <td>1</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>赵一帆</td>
+                    <td>管理员</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>有效</td>
+                    <td>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>赵一帆</td>
+                    <td>管理员</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>有效</td>
+                    <td>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>赵一帆</td>
+                    <td>管理员</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>有效</td>
+                    <td>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>赵一帆</td>
+                    <td>管理员</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>有效</td>
+                    <td>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini editFn">编辑</a>
+                        <a href="javascript:void(0)" class="layui-btn layui-btn-mini delFn">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src="../../res/plugins/layui/layui.js"></script>
+    <script>
+        layui.use(['layer','form','laydate'],function(){
+            var form = layui.form()
+            var laydate = layui.laydate
+            var layer = layui.layer
+
+
+            $('.editFn').on('click', function () {
+                var templateId = $(this).parents("tr").attr('data-id');
+                window.location.href = 'editaccount.html?id=' + templateId;
+            });
+            
+            $('.delFn').on('click', function () {
+                var templateId = $(this).parents("tr").attr('data-id');
+                layer.confirm("确定要删除吗",function(){
+                    layer.msg("已删除")
+                })
+            });
+        })
+    </script>
+</body>
+</html>

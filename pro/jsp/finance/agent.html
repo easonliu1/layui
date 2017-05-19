@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>代理商</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css" media="all">
+		<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+
+	</head>
+	<style>
+		.layui-table td,
+		.layui-table th {
+			padding: 9px 5px;
+		}
+		
+		.layui-form-item {
+			min-width: 1200px;
+		}
+	</style>
+
+	<body>
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>提现记录</legend>
+		</fieldset>
+
+		<div style="margin:0px; background-color: white; margin:0 10px;">
+
+			<form action="" class="layui-form">
+
+				<div class="layui-form-item">
+					<label for="" class="layui-form-label">条件筛选 </label>
+					<div class="layui-input-inline">
+						<select name="status" id="">
+							<option value="">--状态--</option>
+							<option value="0">不限</option>
+							<option value="1">已审核</option>
+							<option value="2">审核中</option>
+							<option value="3">审核未通过</option>
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<div class="layui-input-inline">
+							<input type="text" name="date1" autocomplete="on" placeholder="- 起始时间 -" class="layui-input" onclick="layui.laydate({elem:this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})">
+						</div>
+					</div>
+					<div class="layui-form-mid">至</div>
+					<div class="layui-input-inline">
+						<div class="layui-input-inline">
+							<input type="text" name="date2" autocomplete="on" placeholder="- 结束时间 -" class="layui-input" onclick="layui.laydate({elem:this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})">
+						</div>
+					</div>
+
+				</div>
+				<div class="layui-form-item">
+
+					<label for="" class="layui-form-label">模糊筛选</label>
+					<div class="layui-input-inline">
+						<input type="text" name="orderno" id="orderno" value="" placeholder="余额" class="layui-input" />
+					</div>
+					<div class="layui-input-inline">
+						<input type="text" name="keyword" id="key" value="" placeholder="商家昵称或手机号" class="layui-input" />
+					</div>
+					<div class="layui-input-inline">
+						<button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
+						<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo2" type="reset">重置</button>
+					</div>
+				</div>
+			</form>
+			<div id="content" style="width: 100%;height: 533px;">
+				<table class="layui-table layui-form" lay-even>
+					<thead>
+						<tr>
+							<th style="min-width:30px;text-align:center;">No</th>
+							<th style="min-width:60px;">状态</th>
+							<th style="min-width:80px;">代理商名称</th>
+							<th style="min-width:60px;">账号</th>
+							<th style="min-width:60px;">账号类别</th>
+							<th style="min-width:90px;">省市区县</th>
+							<th style="min-width:60px;">公司名称</th>
+							<th style="min-width:60px;">绑定手机</th>
+							<th style="min-width:60px;">累计充值</th>
+							<th style="min-width:60px;">累计消费</th>
+							<th style="min-width:60px;">累计提现</th>
+							<th style="min-width:60px;">余额</th>
+							<th style="min-width:80px;">申请时间</th>
+							<th style="min-width:80px;">审核时间</th>
+							<th style="min-width:60px;">绑定微信</th>
+							<th style="min-width:80px;">上次登录</th>
+							<th style="min-width:80px;">审核</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+
+					</tbody>
+				</table>
+				<div id="page" style="text-align : center;"></div>
+			</div>
+		</div>
+
+		<script src="../../res/plugins/layui/layui.js"></script>
+		<script type="text/html" id="template">
+			<!--{{# layui.each(d.rows,function(i,v){ }}
+			<tr>
+				<td style="min-width:30px;text-align:center;">{{(d.page-1)*d.pageSize + i + 1}}</td>
+				<td>{{v.activityname || '-'}}</td>
+				<td>{{v.fansname || '-'}}</td>
+				<td>{{v.orderno || '-'}}</td>
+				<td>{{v.money || '-'}}</td>
+				<td>{{transformationId(v.status, 'status') || '-'}}</td>
+				<td>{{v.details || '-'}}</td>
+				<td>{{v.createdtime}}</td>
+				<td>{{v.ip || '-'}}</td>
+			</tr>
+			{{# });}}-->
+		</script>
+		<script>
+			layui.use(['layer', 'form', 'laydate', 'laytpl', 'laypage'], function() {
+				var $ = layui.jquery;
+				var layer = layui.layer;
+				var form = layui.form();
+				var laydate = layui.layedate;
+				var laytpl = layui.laytpl;
+				var laypage = layui.laypage;
+
+				var global = (function() {
+					var obj = {
+						page: 1, // 后面分页插件调取的时候改变全局page
+						totalPages: '3' // 总页数
+					}
+					return obj;
+				})()
+				var params = {
+					date1: 'null',
+					date2: 'null',
+					activityId: '',
+					status: '',
+					giftId: '',
+					giftType: '',
+					keyword: '',
+					orderno: ''
+
+				};
+				form.on('submit(demo1)', function(data) { //监听提交事件并打印			
+
+					//					fansData(data) ;
+					params = data.field;
+					if(params.status == 0) {
+						params.status = '';
+					}
+					if(params.activityId == 0) {
+						params.activityId = '';
+					}
+					if(params.giftType == 0) {
+						params.giftType = '';
+					}
+					ajax(params);
+					page(params)
+					return false
+					// 调取数据
+				});
+				form.on('submit(demo2)', function(data) {
+					params = {
+						date1: 'null',
+						date2: 'null',
+						status: '',
+						giftType: '',
+						keyword: '',
+						orderno: '',
+						activityId: ''
+					};
+					layer.msg('筛选数据清空');
+					ajax(params)
+					page(params)
+				})
+				ajax(params);
+				page(params)
+
+				function ajax(params) {
+					$.ajax({
+						type: 'post',
+						url: '../reports/exchangereport',
+						async: false,
+						dataType: 'json',
+						data: {
+							query: "{'where':{'date1':'" + params.date1 + "','date2':'" + params.date2 + "','activityId':'" + params.activityId + "','status':'" + params.status + "','keyword':'" + params.keyword + "','orderno':'" + params.orderno + "'},'sort':{'id':'desc'},'rp':10,'page':'" + global.page + "'}"
+						},
+						beforeSend: function() {
+							loading = layer.load(1, {
+								shade: [0.3, '#000']
+							});
+						},
+						success: function(data) {
+							layer.close(loading)
+							callback(data);
+						},
+						error: function() {
+							layer.close(loading)
+							layer.msg("请重试")
+						}
+					});
+				}
+
+				var tbody = $('#tbody');
+
+				function callback(data) {
+					// 防止同步解析数据问题  模拟异步
+
+					// tbody.html(laytpl(template.innerHTML).render(data))	 // 模版同步解析语法 
+					global.totalPages = data.totalPages; //  分页	
+					setTimeout(function() {
+						laytpl(template.innerHTML).render(data, function(html) {
+							tbody.html(html) // 渲染dom 
+							//模版异步解析
+						})
+					}, 0)
+				};
+
+				function page(params) {
+					laypage({
+						cont: 'page',
+						pages: global.totalPages,
+						skip: true,
+						jump: function(obj) {
+							global.page = obj.curr;
+							console.log(global.page) // 跳转页 
+							console.log(global.totalPages) // 总页 
+							// 改变ajax传参对象    
+							ajax(params);
+						}
+					})
+				}
+			});
+			$(window).on('resize', function(e) {
+				var $that = $(this);
+				$('#content').height($that.height() - 92);
+			}).resize();
+		</script>
+		</div>
+	</body>
+
+</html>

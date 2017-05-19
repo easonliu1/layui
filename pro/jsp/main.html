@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../res/plugins/layui/css/layui.css">
+
+    <title>首页</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+        .flexBox{
+            justify-content: center;
+        }
+        .flexBox div{
+            text-align: center;
+            border-right: 1px solid #aaa;
+            padding: 0 20px;
+        }
+        .flexBox div:last-child{
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+        
+            
+                <blockquote class="layui-elem-quote layui-quote-nm">
+                    <div class="flexBox flex">
+                        <div>累计访问人数 <br>10000</div>
+                        <div>粉丝增长量 <br>10000</div>
+                        <div>兑换红包 <br>1000次(6580元)</div>
+                        <div>抽奖 <br>1000次(3580元)</div>
+                    </div>
+                </blockquote>
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择活动</label>
+                        <div class="layui-input-inline">
+                            <select name="activities">
+                                <option value="">请选择活动</option>
+                                <option value="活动一">活动一</option>
+                                <option value="活动二">活动二</option>
+                                <option value="活动三">活动三</option>
+                            </select>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">开始日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="date" id="date" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">结束日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="date2" id="date2" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" lay-submit="" lay-filter="find">查询</button>
+                        </div>
+                    </div>
+                </form>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>动态表</legend>
+                </fieldset>
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">红包接口</li>
+                    <li>关注接口</li>
+                    <li>所有接口</li>
+                    <li>短信接口</li>
+                    <li>商户数量</li>
+                    <li>累计充值</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="echart" id="echarts" style="height: 400px;width: 600px"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="echart" id="echarts2" style="height: 400px;width: 600px"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="echart" id="echarts3" style="height: 400px;width: 600px;"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="echart" id="echarts4" style="height: 400px;width: 600px;"></div>
+                    </div>
+                    <div class="layui-tab-item">商户数量</div>
+                    <div class="layui-tab-item">累计充值</div>
+                </div>
+             </div>
+            <div class="" id="echarts5" style="height: 800px;width: 1000px;margin-top:50px;"></div>
+            
+        
+    
+
+
+
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src="../res/plugins/layui/layui.js"></script>
+    <script src="../res/js/echarts.min.js"></script>
+    <script>
+        //Layui组件
+        layui.use(['layer', 'laydate', 'form', 'element'], function () {
+            var form = layui.form()
+            var layer = layui.layer
+            var laydate = layui.laydate
+            var element = layui.element()
+            form.on('submit(find)', function (data) {
+                var obj = JSON.stringify(data.field)
+                layer.alert(obj)
+                return false
+                $.ajax({
+                    url: "url",
+                    type: "post",
+                    async: false,
+                    success: function (data) {
+                        layer.msg("ok")
+                    },
+                    beforeSend: function () {
+                        layer.msg("ing...")
+                    },
+                    error: function () {
+                        layer.msg("err")
+                    }
+                })
+            })
+            element.on('tab',function(e){
+                console.log(e)
+            })
+        })
+
+
+        //Echarts组件
+        var width_ = (document.body.clientWidth - 220) 
+        var height_ = 400
+        $(".echart").css({ "width": width_, "height": height_ })
+
+        var canvas_ = document.getElementById('echarts')
+        var canvas_2 = document.getElementById('echarts2')
+        var canvas_3 = document.getElementById('echarts3')
+        var canvas_4 = document.getElementById('echarts4')
+
+        var myChart = echarts.init(canvas_);
+        var myChart2 = echarts.init(canvas_2);
+        var myChart3 = echarts.init(canvas_3);
+        var myChart4 = echarts.init(canvas_4);
+
+        var option = {
+            title: {
+                text: '访问流量关系图',
+                subtext: ' ',
+                x: 'center',
+                align: 'right'
+            },
+            grid: {
+                bottom: 80
+            },
+            toolbox: {
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    animation: false,
+                    label: {
+                        backgroundColor: '#505765'
+                    }
+                }
+            },
+            legend: {
+                data: ['流量'],
+                x: 'left'
+            },
+            dataZoom: [
+                {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    realtime: true,
+                    start: 65,
+                    end: 85
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    axisLine: { onZero: false },
+                    data: [
+                        '2009/6/12 2:00', '2009/6/12 3:00', '2009/6/12 4:00', '2009/6/12 5:00', '2009/6/12 6:00', '2009/6/12 7:00', '2009/6/12 8:00', '2009/6/12 9:00', '2009/6/12 10:00', '2009/6/12 11:00', '2009/6/12 12:00', '2009/6/12 13:00', '2009/6/12 14:00', '2009/6/12 15:00', '2009/6/12 16:00', '2009/6/12 17:00', '2009/6/12 18:00', '2009/6/12 19:00', '2009/6/12 20:00', '2009/6/12 21:00', '2009/6/12 22:00', '2009/6/12 23:00',
+                        '2009/6/13 0:00', '2009/6/13 1:00', '2009/6/13 2:00', '2009/6/13 3:00', '2009/6/13 4:00', '2009/6/13 5:00', '2009/6/13 6:00', '2009/6/13 7:00', '2009/6/13 8:00', '2009/6/13 9:00', '2009/6/13 10:00', '2009/6/13 11:00', '2009/6/13 12:00', '2009/6/13 13:00', '2009/6/13 14:00', '2009/6/13 15:00', '2009/6/13 16:00', '2009/6/13 17:00', '2009/6/13 18:00', '2009/6/13 19:00', '2009/6/13 20:00', '2009/6/13 21:00', '2009/6/13 22:00', '2009/6/13 23:00',
+                        '2009/6/14 0:00', '2009/6/14 1:00', '2009/6/14 2:00', '2009/6/14 3:00', '2009/6/14 4:00', '2009/6/14 5:00', '2009/6/14 6:00', '2009/6/14 7:00', '2009/6/14 8:00', '2009/6/14 9:00', '2009/6/14 10:00', '2009/6/14 11:00', '2009/6/14 12:00', '2009/6/14 13:00', '2009/6/14 14:00', '2009/6/14 15:00', '2009/6/14 16:00', '2009/6/14 17:00', '2009/6/14 18:00', '2009/6/14 19:00', '2009/6/14 20:00', '2009/6/14 21:00', '2009/6/14 22:00', '2009/6/14 23:00',
+                        '2009/6/15 0:00', '2009/6/15 1:00', '2009/6/15 2:00', '2009/6/15 3:00', '2009/6/15 4:00', '2009/6/15 5:00', '2009/6/15 6:00', '2009/6/15 7:00', '2009/6/15 8:00', '2009/6/15 9:00', '2009/6/15 10:00', '2009/6/15 11:00', '2009/6/15 12:00', '2009/6/15 13:00', '2009/6/15 14:00', '2009/6/15 15:00', '2009/6/15 16:00', '2009/6/15 17:00', '2009/6/15 18:00', '2009/6/15 19:00', '2009/6/15 20:00', '2009/6/15 21:00', '2009/6/15 22:00', '2009/6/15 23:00',
+                        '2009/6/15 0:00', '2009/6/16 1:00', '2009/6/16 2:00', '2009/6/16 3:00', '2009/6/16 4:00', '2009/6/16 5:00', '2009/6/16 6:00', '2009/6/16 7:00', '2009/6/16 8:00', '2009/6/16 9:00', '2009/6/16 10:00', '2009/6/16 11:00', '2009/6/16 12:00', '2009/6/16 13:00', '2009/6/16 14:00', '2009/6/16 15:00', '2009/6/16 16:00', '2009/6/16 17:00', '2009/6/16 18:00', '2009/6/16 19:00', '2009/6/16 20:00', '2009/6/16 21:00', '2009/6/16 22:00', '2009/6/16 23:00',
+                        '2009/6/15 0:00', '2009/6/17 1:00', '2009/6/17 2:00', '2009/6/17 3:00', '2009/6/17 4:00', '2009/6/17 5:00', '2009/6/17 6:00'
+                    ].map(function (str) {
+                        return str.replace(' ', '\n')
+                    })
+                }
+            ],
+            yAxis: [
+                {
+                    name: '流量(m^3/s)',
+                    type: 'value',
+                    max: 500
+                }
+            ],
+            series: [
+                {
+                    name: '流量',
+                    type: 'line',
+                    animation: false,
+                    areaStyle: {
+                        normal: {}
+                    },
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    },
+                    markArea: {
+                        silent: true,
+                        data: [[{
+                            xAxis: '2009/6/13\n3:00'
+                        }, {
+                            xAxis: '2009/6/16\n7:00'
+                        }]]
+                    },
+                    data: [
+                        0.97, 0.99, 1.02, 1.05, 1.08, 1.11, 1.15, 1.18, 1.32, 1.66, 2.21, 2.97, 3.94, 5.11, 6.5, 8.1, 9.9, 11.92, 14.15, 16.6, 22.3, 22.8, 24.48, 30.38, 35.74, 42.4, 57.14, 94.04, 112.9, 123.4, 130.4, 130, 119.4, 120.7, 116.8, 118.1, 119.4, 124.8, 143.5, 204, 294, 319.2, 328.4, 365, 350.8, 347.6, 347.6, 325, 331.6, 319.2, 308, 308, 308, 308, 296.8, 300, 281, 278.4, 270.6, 271, 253.6, 233.5, 219.2, 207.8, 205.9, 204, 189.6, 178.8, 173.4, 160, 154.4, 146, 145, 140.5, 130.4, 126.2, 116.8, 112.9, 106.5, 101.6, 98.51, 82.67, 67.3, 80.05, 76.12, 72.3, 71.02, 69.78, 67.3, 67.3, 68.54, 57.6, 71.02, 66.06, 59.12, 57.14, 55.16, 55.16, 52.19, 52.19, 51.2, 48.56, 44.16, 43, 45.92, 49.44, 44.16, 36.48, 35.74, 35, 32.36, 37.22, 32.36, 32.36, 32.36, 33.68, 32.36, 31.7, 35.74, 29.72, 32.36, 30.38, 29.72, 28.4, 28.4,
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+        myChart2.setOption(option);
+        myChart3.setOption(option);
+        myChart4.setOption(option);
+
+
+        //关系网option
+        var canvas_5 = document.getElementById("echarts5")
+        var myChart5 = echarts.init(canvas_5)
+        var option2 = {
+            title: {
+                text: "海报快传数据分析",
+                subtext: "粉丝关系图",
+                top: "top",
+                left: "center"
+            },
+            legend: {
+                formatter: function (name) {
+                    return echarts.format.truncateText(name, 40, '14px Microsoft Yahei', '…');
+                },
+                //data: ['111111', '222222', '333333', '444444', '555555', '666666', '777777', '888888', '999999']
+
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: { show: true, readOnly: true },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            series: [
+                {
+                    name: "海报快传",
+                    type: "graph",
+                    layout: "force",
+                    force: {
+                        //repulsion: 50     排斥力
+                        initLayout: "circular",
+                        edgeLength: 10,
+                        repulsion: 100,
+                        gravity: 0.2
+                    },
+                    animation: true,
+                    label: {
+                        normal: {
+                            position: "right",
+                            formatter: "{b}"
+                        }
+                    },
+                    draggable: true,
+                    data: [
+                        {
+                            "name": "海报快传",
+                            "symbolSize": 20,
+                            "value": 2700
+                        },
+                        {
+                            "name": "111111",
+                            "value": 3,
+                            "symbolSize": 10,
+                            "category": "111111",
+                            "draggable": "true"
+                        }, {
+                            "name": "1的子节点",
+                            "symbolSize": 7,
+                            "category": "111111",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "1的子节点2",
+                            "symbolSize": 7,
+                            "category": "111111",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "1的子节点3",
+                            "symbolSize": 7,
+                            "category": "111111",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "222222",
+                            "value": 6,
+                            "symbolSize": 10,
+                            "category": "222222",
+                            "draggable": "true"
+                        }, {
+                            "name": "2的粉丝1",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "2的粉丝2",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "2的粉丝3",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "2的粉丝4",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "2的粉丝5",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "2的粉丝6",
+                            "symbolSize": 7,
+                            "category": "222222",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "333333",
+                            "value": 5,
+                            "symbolSize": 10,
+                            "category": "333333",
+                            "draggable": "true"
+                        }, {
+                            "name": "3的粉丝1",
+                            "symbolSize": 7,
+                            "category": "333333",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "3的粉丝2",
+                            "symbolSize": 7,
+                            "category": "333333",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "3的粉丝3",
+                            "symbolSize": 7,
+                            "category": "333333",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "3的粉丝4",
+                            "symbolSize": 7,
+                            "category": "333333",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "3的粉丝5",
+                            "symbolSize": 7,
+                            "category": "333333",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "444444",
+                            "value": 6,
+                            "symbolSize": 10,
+                            "category": "444444",
+                            "draggable": "true"
+                        }, {
+                            "name": "4的粉丝1",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "4的粉丝2",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "4的粉丝3",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "4的粉丝4",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "4的粉丝5",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "4的粉丝6",
+                            "symbolSize": 7,
+                            "category": "444444",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "555555",
+                            "symbolSize": 10,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝1",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝2",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝3",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝4",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝5",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝6",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝7",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "5的粉丝8",
+                            "symbolSize": 7,
+                            "category": "555555",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "666666",
+                            "symbolSize": 10,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "6的粉丝1",
+                            "symbolSize": 7,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "6的粉丝2",
+                            "symbolSize": 7,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "6的粉丝3",
+                            "symbolSize": 7,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "6的粉丝4",
+                            "symbolSize": 7,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "6的粉丝5",
+                            "symbolSize": 7,
+                            "category": "666666",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "777777",
+                            "symbolSize": 10,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝1",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝2",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝3",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝4",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝5",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "7的粉丝6",
+                            "symbolSize": 7,
+                            "category": "777777",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "888888",
+                            "symbolSize": 10,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝1",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝2",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝3",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝4",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝5",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝6",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝7",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝8",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝9",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "8的粉丝10",
+                            "symbolSize": 7,
+                            "category": "888888",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "999999",
+                            "symbolSize": 10,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝1",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝2",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝3",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝4",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝5",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }, {
+                            "name": "9的粉丝6",
+                            "symbolSize": 7,
+                            "category": "999999",
+                            "draggable": "true",
+                            "value": 1
+                        }
+
+
+
+                    ],
+                    categories: [
+                        {
+                            'name': '111111'                    //二级节点名称
+                        }, {
+                            'name': '222222'
+                        }, {
+                            'name': '333333'
+                        }, {
+                            'name': '444444'
+                        }, {
+                            'name': '555555'
+                        }, {
+                            'name': '666666'
+                        }, {
+                            'name': '777777'
+                        }, {
+                            'name': '888888'
+                        }, {
+                            'name': '999999'
+                        }
+                    ],
+                    links: [                                    //连线
+                        {
+                            "source": "海报快传",               //目标节点
+                            "target": "111111"                 //目的节点
+                        }, {
+                            "source": "111111",
+                            "target": "1的子节点"
+                        }, {
+                            "source": "111111",
+                            "target": "1的子节点2"
+                        }, {
+                            "source": "111111",
+                            "target": "1的子节点3"
+                        }, {
+                            "source": "海报快传",
+                            "target": "222222"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝1"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝2"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝3"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝4"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝5"
+                        }, {
+                            "source": "222222",
+                            "target": "2的粉丝6"
+                        }, {
+                            "source": "海报快传",
+                            "target": "333333"
+                        }, {
+                            "source": "333333",
+                            "target": "3的粉丝1"
+                        }, {
+                            "source": "333333",
+                            "target": "3的粉丝2"
+                        }, {
+                            "source": "333333",
+                            "target": "3的粉丝3"
+                        }, {
+                            "source": "333333",
+                            "target": "3的粉丝4"
+                        }, {
+                            "source": "333333",
+                            "target": "3的粉丝5"
+                        }, {
+                            "source": "海报快传",
+                            "target": "444444"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝1"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝2"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝3"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝4"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝5"
+                        }, {
+                            "source": "444444",
+                            "target": "4的粉丝6"
+                        }, {
+                            "source": "海报快传",
+                            "target": "555555"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝1"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝2"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝3"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝4"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝5"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝6"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝7"
+                        }, {
+                            "source": "555555",
+                            "target": "5的粉丝8"
+                        }, {
+                            "source": "海报快传",
+                            "target": "666666"
+                        }, {
+                            "source": "666666",
+                            "target": "6的粉丝1"
+                        }, {
+                            "source": "666666",
+                            "target": "6的粉丝2"
+                        }, {
+                            "source": "666666",
+                            "target": "6的粉丝3"
+                        }, {
+                            "source": "666666",
+                            "target": "6的粉丝4"
+                        }, {
+                            "source": "666666",
+                            "target": "6的粉丝5"
+                        }, {
+                            "source": "海报快传",
+                            "target": "777777"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝1"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝2"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝3"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝4"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝5"
+                        }, {
+                            "source": "777777",
+                            "target": "7的粉丝6"
+                        }, {
+                            "source": "海报快传",
+                            "target": "888888"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝1"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝2"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝3"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝4"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝5"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝6"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝7"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝8"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝9"
+                        }, {
+                            "source": "888888",
+                            "target": "8的粉丝10"
+                        }, {
+                            "source": "海报快传",
+                            "target": "999999"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝1"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝2"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝3"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝4"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝5"
+                        }, {
+                            "source": "999999",
+                            "target": "9的粉丝6"
+                        }
+                    ],
+
+                    focusNodeAdjacency: true,
+                    roam: true,
+                    label: {
+                        normal: {
+
+                            show: false,
+                            position: 'top',
+
+                        }
+                    },
+                    lineStyle: {
+                        normal: {
+                            color: 'source',
+                            curveness: 0,
+                            type: "solid"
+                        }
+                    }
+                }
+            ]
+        }
+
+
+
+        myChart5.setOption(option2)
+    </script>
+</body>
+
+</html>

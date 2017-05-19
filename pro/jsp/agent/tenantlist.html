@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+    <style>
+        .ri_btn{
+            float: right;
+            margin-right: 10px;
+        }
+        .ri_btn::after{
+            content: '';
+            clear: both;
+        }
+        .userPic{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>注册代理商</legend>
+    </fieldset>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            
+            <div class="layui-input-inline">
+                <select name="modules" lay-verify="required" lay-search="">
+                    <option value="">直接选择或搜索选择</option>
+                    <option value="1">layer</option>
+                    <option value="2">form</option>
+                    <option value="3">layim</option>
+                    <option value="4">element</option>
+                    
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" name=""  placeholder="关键字" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="query">查询</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+            <div class="ri_btn">
+                <a href="addtenant.html" class="layui-btn" id="add-activity"><i class="layui-icon">&#xe608;</i> 添加活动</a>
+            </div>
+        </div>
+        <table class="layui-table activty-manage" lay-even>
+            <thead>
+                <tr>
+                    <th style="min-width:20px;">No</th>
+                    <th style="min-width:84px;">帐号</th>
+                    <th style="min-width:60px;">帐号状态</th>
+                    <th style="min-width:106px;">微信名</th>
+                    <th style="min-width:106px;">手机号</th>
+                    <th style="min-width:156px;">所在地址</th>
+                    <th style="min-width:164px;">创建时间</th>
+                    <th style="min-width:164px;">操作</th>
+                </tr>
+            </thead>
+            <tbody id="activity-list">
+                <tr>
+                    <td>1</td>
+                    <td>123</td>
+                    <td>启动</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>13733730500</td>
+                    <td>广东省深圳市福田区</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>
+                        <a class="layui-btn layui-btn-small item-activity" >查看</a> 
+                        <a class="layui-btn layui-btn-small edit-activity" >编辑</a> 
+                        <a class="layui-btn layui-btn-small delete-activity">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>123</td>
+                    <td>启动</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>13733730500</td>
+                    <td>广东省深圳市福田区</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>
+                        <a class="layui-btn layui-btn-small item-activity" >查看</a> 
+                        <a class="layui-btn layui-btn-small edit-activity" >编辑</a> 
+                        <a class="layui-btn layui-btn-small delete-activity">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>123</td>
+                    <td>启动</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>13733730500</td>
+                    <td>广东省深圳市福田区</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>
+                        <a class="layui-btn layui-btn-small item-activity" >查看</a> 
+                        <a class="layui-btn layui-btn-small edit-activity" >编辑</a> 
+                        <a class="layui-btn layui-btn-small delete-activity">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>123</td>
+                    <td>启动</td>
+                    <td><img src="../../res/images/default_user.png" class="userPic">西瓜🍉</td>
+                    <td>13733730500</td>
+                    <td>广东省深圳市福田区</td>
+                    <td>2017-05-03 16:05:01</td>
+                    <td>
+                        <a class="layui-btn layui-btn-small item-activity" >查看</a> 
+                        <a class="layui-btn layui-btn-small edit-activity" >编辑</a> 
+                        <a class="layui-btn layui-btn-small delete-activity">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src="../../res/plugins/layui/layui.js"></script>
+    <script>
+        layui.use(['layer','form'],function(){
+            var form = layui.form()
+            var layer = layui.layer
+        })
+    </script>
+</body>
+</html>

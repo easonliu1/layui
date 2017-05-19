@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>概览</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css" media="all">
+		<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+		<style type="text/css">
+			.layui-form-item {
+				min-width: 1250px;
+			}
+			
+			.global_data {
+				width: 1200px;
+				padding: 0 25px;
+				overflow: hidden;
+				min-width: 1150px;
+			}
+			
+			.global_data ul {
+				width: 1200px;
+				overflow: hidden;
+			}
+			
+			.global_data ul li {
+				float: left;
+				width: 190px;
+				height: 60px;
+				border: 1px solid #D2D2D2;
+				border-right: none;
+				padding: 20px 0;
+				text-indent: 10px;
+			}
+			
+			.global_data ul li:last-of-type {
+				border-right: 1px solid #D2D2D2;
+			}
+			
+			.global_data ul li .style_title {
+				color: #999;
+			}
+			
+			.global_data ul li .style_center {
+				font-size: 30px;
+				line-height: 40px;
+				font-weight: 700;
+				text-indent: 20px;
+			}
+			
+			.active {}
+		</style>
+	</head>
+
+	<body>
+
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+			<legend>概览</legend>
+		</fieldset>
+		<form action="" class="layui-form">
+
+			<div class="layui-form-item">
+				<label for="" class="layui-form-label">条件筛选</label>
+				<div class="layui-input-inline">
+					<select name="agent" id="">
+						<option value="">代理商</option>
+						<option value="0">不限代理商</option>
+						<option value="1">浙江</option>
+						<option value="2">江西</option>
+						<option value="2">福建</option>
+					</select>
+				</div>
+				<div class="layui-input-inline">
+					<select name="merchant" id="">
+						<option value="">商户</option>
+						<option value="0">不限商户</option>
+						<option value="杭州">杭州</option>
+						<option value="宁波">宁波</option>
+						<option value="温州">温州</option>
+						<option value="绍兴">绍兴</option>
+						<option value="许昌">许昌</option>
+					</select>
+				</div>
+
+				<div class="layui-input-inline">
+
+					<input type="text" id="data1" name="date1" autocomplete="off" placeholder="- 自定义-" class="layui-input" onclick="layui.laydate({elem:this})">
+
+				</div>
+
+				<div class="layui-inline">
+
+					<div class="layui-btn layui-btn-primary days day">今天</div>
+					<div class="layui-btn layui-btn-primary days day">昨天</div>
+					<div class="layui-btn active days">7天</div>
+					<div class="layui-btn layui-btn-primary days">30天</div>
+				</div>
+
+				<div class="layui-inline">
+					<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+					<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="demo2" type="reset">重置</button>
+				</div>
+			</div>
+		</form>
+		<div class="global_data">
+			<ul>
+				<li>
+					<p class="style_title">客户数量/个</p>
+					<p class="style_center">200</p>
+				</li>
+				<li>
+					<p class="style_title">累计充值/万元</p>
+					<p class="style_center">200</p>
+				</li>
+				<li>
+					<p class="style_title">累计退款/万元</p>
+					<p class="style_center">200</p>
+				</li>
+				<li>
+					<p class="style_title">累计提现/万元</p>
+					<p class="style_center">200</p>
+				</li>
+				<li>
+					<p class="style_title">活动数量/个</p>
+					<p class="style_center">200</p>
+				</li>
+				<li>
+					<p class="style_title">红包接口/次</p>
+					<p class="style_center">200</p>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="padding:0 25px;width: 1200px;">
+
+			<ul class="layui-tab-title">
+				<li class="layui-this">客户数量</li>
+				<li>累计充值</li>
+				<li>累计退款</li>
+				<li>累计提现</li>
+				<li>活动数量</li>
+				<li>红包接口</li>
+			</ul>
+			<div class="layui-tab-content" style="">
+				<div class="layui-tab-item layui-show">
+
+					<div class="echart" id="echarts" style="height: 400px;width: 100%">1</div>
+				</div>
+				<div class="layui-tab-item">
+
+					<div class="echart" id="echarts2" style="height: 400px;width: 100%">2</div>
+				</div>
+				<div class="layui-tab-item">
+
+					<div class="echart" id="echarts3" style="height: 400px;width: 100%;">3</div>
+				</div>
+				<div class="layui-tab-item">
+
+					<div class="echart" id="echarts4" style="height: 400px;width: 100%;">4</div>
+				</div>
+				<div class="layui-tab-item">
+
+					<div class="echart" id="echarts5" style="height: 400px;width: 100%;">5</div>
+				</div>
+				<div class="layui-tab-item">
+
+					<div class="echart" id="echarts6" style="height: 400px;width: 100%;">6</div>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="../../res/plugins/layui/layui.js"></script>
+		<script src="../../res/js/echarts.min.js"></script>
+		<script>
+			layui.use(['layer', 'laydate', 'form', 'element'], function() {
+				var form = layui.form()
+				var layer = layui.layer
+				var element = layui.element
+				var laydate = layui.laydate;
+				function init () {
+					sevenTime(globalParmeter.date1 + ' 至 ' + globalParmeter.date2 + ' 小时分析数据')
+				}
+				// '248723872' -yyyy-mm-dd
+				function timeFormat(timesTamp) {
+					y = timesTamp.getFullYear();
+					m = timesTamp.getMonth() + 1 >= 10 ? timesTamp.getMonth() + 1 : '0' + (timesTamp.getMonth() + 1);
+					r = timesTamp.getDate() >= 10 ? timesTamp.getDate() : '0' + timesTamp.getDate();
+					time = y + '-' + m + '-' + r;
+					return time
+				}
+				//  => '248723872'
+				function timeFormat2(timeString) {
+					var timesTamp = Date.parse(timeString);
+					return timesTamp;
+				}
+
+				function ajax(globalParmeter) {
+					ajax({
+						url: globalParmeter.url,
+						type: 'post',
+						date: '',
+						async: false,
+						data: {
+							query: "{'where':{'date1':'" + globalParmeter.date1 + "','date2':'" + globalParmeter.date2 + "'}}"
+						},
+						beforSend: function() {
+							loading = layer.load(1, {
+								shade: [0.3, '#000']
+							});
+						},
+						success: function() {
+							layer.close(loading)
+						},
+						error: function() {
+							layer.close(loading)
+							layer.msg("请重试")
+						}
+					})
+				}
+				
+				// globalParameter
+				var globalParmeter = {
+					url: '',
+					date1: timeFormat(new Date(new Date().getTime() - 7 * 24 * 3600000)),
+					date2: timeFormat(new Date()),
+					chartsType: '7'
+				}
+				// initialization
+				init()
+				form.on('submit(demo1)', function(dataObj) {
+					// new Date
+					var nowData = new Date();
+					var obj = dataObj.field
+					console.log(obj)
+					// Local Variable cache
+					var time;
+					var days = $('.active').html();
+					if(obj.date1 == '') {
+						var inputTimesTamp = parseInt(timeFormat2(nowData))
+						// Never enter a time
+						globalParmeter.date2 = timeFormat(nowData) // now Time
+						if(days == '今天') {
+							globalParmeter.date1 = timeFormat(nowData)
+							console.log(globalParmeter.date1)
+							globalParmeter.chartsType = 1;
+						}
+						if(days == '昨天') {
+							time = new Date(new Date().getTime() - 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1);
+							globalParmeter.chartsType = 1;
+						}
+						if(days == '7天') {
+							time = new Date(new Date().getTime() - 7 * 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1);
+							globalParmeter.chartsType = 7;
+						}
+						if(days == '30天') {
+							time = new Date(new Date().getTime() - 30 * 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1)
+							globalParmeter.chartsType = 30;
+						}
+
+					} else {
+						globalParmeter.date2 = obj.date1 // input Time
+						// nter the time
+						var inputTimesTamp = parseInt(timeFormat2($('#data1').val()));
+						if(days == '今天') {
+							globalParmeter.date1 = timeFormat(new Date(inputTimesTamp));
+							console.log(globalParmeter.date1);
+							globalParmeter.chartsType = 1;
+
+							// ajax(params)
+						}
+						if(days == '昨天') {
+							time = new Date(inputTimesTamp - 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1)
+							globalParmeter.chartsType = 1;
+						}
+						if(days == '7天') {
+							time = new Date(inputTimesTamp - 7 * 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1)
+							globalParmeter.chartsType = 7;
+						}
+						if(days == '30天') {
+							time = new Date(inputTimesTamp - 30 * 24 * 3600000);
+							globalParmeter.date1 = timeFormat(time);
+							console.log(globalParmeter.date1)
+							globalParmeter.chartsType = 30;
+						}
+					}
+
+					// ajax(params)
+					// judge globalParmeter.chartsType  
+					if(globalParmeter.chartsType == 7) {
+						sevenTime(globalParmeter.date1 + ' 至 ' + globalParmeter.date2 + ' 小时分析数据')
+					}
+					if(globalParmeter.chartsType == 1 || globalParmeter.chartsType == 30) {
+						if(globalParmeter.chartsType == 1) one_thirtyTime(globalParmeter.date1 + ' 00:00-' + globalParmeter.date1 + ' 12:00 5分钟分析数据', globalParmeter.date1 + ' 12:00-' + globalParmeter.date1 + ' 24:00 5分钟分析数据');
+						if(globalParmeter.chartsType == 30) one_thirtyTime(globalParmeter.date1 + ' 至 ' + timeFormat(new Date(inputTimesTamp - 15 * 24 * 3600000)) + ' 小时分析数据', timeFormat(new Date(inputTimesTamp - 15 * 24 * 3600000)) + ' 至 ' + timeFormat(new Date(inputTimesTamp)) + ' 小时分析数据');
+					}
+
+					return false // Preventing Default Behavior.
+				})
+				
+				form.on('submit(demo2)', function(data) {
+					layer.msg('数据已清空')
+					var nowData = new Date();
+					globalParmeter.date2 = timeFormat(nowData)
+					var time;
+					time = new Date(new Date().getTime() - 7 * 24 * 3600000);
+					globalParmeter.date1 = timeFormat(time);
+					console.log(globalParmeter.date1);
+					globalParmeter.chartsType = 7;
+					$('.days').eq(2).addClass('active').removeClass('layui-btn-primary').siblings().addClass('layui-btn-primary').removeClass('active')
+					sevenTime(globalParmeter.date1 + ' 至 ' + globalParmeter.date2 + ' 小时分析数据')
+				})
+				// 
+				$('#data1').blur(function() {
+					//					if($(this).val()) $('.day').addClass('layui-btn-disabled');
+					//					if($(this).val() == false) $('.day').removeClass('layui-btn-disabled')
+					//					$('.days').eq(2).addClass('active').removeClass('layui-btn-primary').siblings().addClass('ayui-btn-primary').removeClass('active');
+					//                  
+				})
+				// Number of switches
+				$('.days').click(function() {
+					$(this).removeClass('layui-btn-primary').addClass('active').siblings().addClass('layui-btn-primary').removeClass('active')
+				})
+
+				// echarts
+
+				function sevenTime(a) {
+					var myChart = echarts.init(document.getElementById('echarts'));
+					$.getJSON('demo.json', function(data) {
+
+						data = data.slice(0, 168); // 时间到着传过来 可以利用第二个参数控制时间范围
+						var dateList = data.map(function(item) {
+							return item[0];
+						});
+						var valueList = data.map(function(item) {
+							return item[1];
+						});
+						console.log(data)
+						myChart.showLoading({
+							text: "图表数据正在努力加载..."
+						});
+						myChart.setOption(option = {
+
+							// Make gradient line here
+							visualMap: [{
+								show: false,
+								type: 'continuous',
+								seriesIndex: 0,
+								min: 0,
+								max: 400
+							}],
+							toolbox: {
+								feature: {
+
+									saveAsImage: {},
+									align: 'center'
+								}
+							},
+
+							title: [{
+								left: 'center',
+								text: a
+							}],
+							tooltip: {
+								trigger: 'axis'
+							},
+							xAxis: [{
+								data: dateList,
+								boundaryGap: true,
+								axisTick: {
+									alignWithLabel: true,
+									interval: 23,
+
+								},
+								axisLabel: {
+									interval: 23,
+								}
+							}],
+							yAxis: [{
+								type: 'value',
+								splitLine: {
+									show: false
+								},
+								axisLabel: {
+									show: true,
+									formatter: '{value}元' // 配置y轴内容 
+								}
+							}],
+							grid: [{
+								bottom: '30%'
+							}],
+							series: [{
+								type: 'line',
+								smooth: true, // 趋缓
+								data: valueList
+
+							}]
+						});
+
+						myChart.setOption(option);
+						myChart.hideLoading()
+					});
+				};
+
+				function one_thirtyTime(a, b) {
+					var myChart = echarts.init(document.getElementById('echarts'));
+					$.getJSON('demo.json', function(data) {
+
+						data1 = data.slice(0, 145); // 时间到着传过来 可以利用第二个参数控制时间范围
+						data2 = data.slice(145, 290)
+						var dateList1 = data1.map(function(item) {
+							return item[0];
+						});
+						var valueList1 = data1.map(function(item) {
+							return item[1];
+						});
+						var dateList2 = data2.map(function(item) {
+							return item[0];
+						});
+						var valueList2 = data2.map(function(item) {
+							return item[1];
+						});
+						console.log(data)
+						myChart.showLoading({
+							text: "图表数据正在努力加载..."
+						});
+						myChart.setOption(option = {
+
+							// Make gradient line here
+							visualMap: [{
+								show: false,
+								type: 'continuous',
+								seriesIndex: 0,
+
+							}, {
+								show: false,
+								type: 'continuous',
+								seriesIndex: 1,
+								dimension: 0,
+
+							}],
+							toolbox: {
+								feature: {
+
+									saveAsImage: {},
+									align: 'center'
+								}
+							},
+
+							title: [{
+								left: 'center',
+								text: a
+							}, {
+								top: '55%',
+								left: 'center',
+								text: b
+							}],
+							tooltip: {
+								trigger: 'axis'
+							},
+							xAxis: [{
+								data: dateList1,
+								boundaryGap: true,
+								axisTick: {
+									alignWithLabel: true,
+									interval: 11,
+
+								},
+								axisLabel: {
+									interval: 11,
+								}
+							}, {
+								data: dateList2,
+								gridIndex: 1,
+								axisTick: {
+									alignWithLabel: true,
+									interval: 11,
+
+								},
+								axisLabel: {
+									interval: 11,
+								}
+							}],
+							yAxis: [{
+								type: 'value',
+								splitLine: {
+									show: false
+								},
+								axisLabel: {
+									show: true,
+									formatter: '{value}元' // 配置y轴内容 
+								}
+							}, {
+								splitLine: {
+									show: false
+								},
+								gridIndex: 1
+							}],
+							grid: [{
+								bottom: '60%'
+							}, {
+								top: '60%'
+							}],
+							series: [{
+								type: 'line',
+								smooth: true, // 趋缓
+								data: valueList1
+
+							}, {
+								type: 'line',
+								data: valueList2,
+								xAxisIndex: 1,
+								yAxisIndex: 1
+							}]
+						});
+
+						myChart.setOption(option);
+						myChart.hideLoading()
+					});
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

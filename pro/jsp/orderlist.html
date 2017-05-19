@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>订单</title>
+		<link rel="stylesheet" href="../res/plugins/layui/css/layui.css">
+		<style>
+			.layui-tab-title li { min-width: 100px;}
+			.layui-table td, .layui-table th{ padding: 9px 5px; text-align: center;}
+		</style>
+	</head>
+
+	<body style="min-width:1200px;">
+		<div class="layui-form">
+			<div class="layui-form-item" style="margin-bottom: 10px;">
+				<div class="layui-input-inline">
+					<input name="start-time" class="layui-input" placeholder="--开始时间--" id="start-time" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})" />
+				</div>
+				<div class="layui-input-inline">
+					<input name="end-time" class="layui-input" placeholder="--结束时间--" id="end-time" onclick="layui.laydate({elem: this,format: 'YYYY-MM-DD hh:mm:ss',istime: true})" />
+				</div>
+				<div class="layui-input-inline merchant">
+					<select name="merchant">
+						<option value="">--商户--</option>
+						<option value="1">商户1</option>
+						<option value="2">商户2</option>
+						<option value="3">商户3</option>
+					</select>
+				</div>
+				<div class="layui-input-inline product">
+					<select name="product">
+						<option value="">--产品--</option>
+						<option value="1">产品1</option>
+						<option value="2">产品2</option>
+						<option value="3">产品3</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-inline goods">
+					<select name="goods">
+						<option value="">--商品--</option>
+						<option value="1">商品1</option>
+						<option value="2">商品2</option>
+						<option value="3">商品3</option>
+					</select>
+				</div>
+				<div class="layui-input-inline pay-mode">
+					<select name="pay-mode">
+						<option value="">--支付方式--</option>
+						<option value="1">微支付</option>
+						<option value="2">支付宝</option>
+						<option value="3">银行卡</option>
+						<option value="4">银行转帐</option>
+					</select>
+				</div>
+				<div class="layui-input-inline" style="width: 250px;">
+					<input type="text" class="layui-input" name="keyword" placeholder="关键字" />
+				</div>
+				<button class="layui-btn query-btn">查询</button>
+				<a class="layui-btn layui-btn-primary reset-btn" href="orderlist.html">重置</a>
+			</div>
+		</div>
+		<div class="layui-tab layui-tab-brief">
+			<ul class="layui-tab-title">
+				<li class="layui-this">全部(<span class="num">3</span>)</li>
+				<li>支付成功(<span class="num">1</span>)</li>
+				<li>支付失败(<span class="num">1</span>)</li>
+				<li>未支付(<span class="num">1</span>)</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>订单状态</th>
+								<th>订单编号</th>
+								<th>商户</th>
+								<th>公众号</th>
+								<th>产品</th>
+								<th>商品</th>
+								<th>商品数量</th>
+								<th>订单金额</th>
+								<th>订单描述</th>
+								<th>支付方式</th>
+								<th>支付流水号</th>
+								<th>下单时间</th>
+								<th>支付时间</th>
+							</tr>
+						</thead>
+						<tbody id="order-list">
+							<tr>
+								<td>1</td>
+								<td style="color:#10a70c;">支付成功</td>
+								<td>1234567895646523</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>微支付</td>
+								<td>2546584665656323232</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>2017-05-03 12:00:00</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td style="color:#999;">未支付</td>
+								<td>1234567895646524</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>-</td>
+								<td>-</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td style="color:#d03d36;">支付失败</td>
+								<td>1234567895646525</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>-</td>
+								<td>-</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="layui-tab-item">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>订单状态</th>
+								<th>订单编号</th>
+								<th>商户</th>
+								<th>公众号</th>
+								<th>产品</th>
+								<th>商品</th>
+								<th>商品数量</th>
+								<th>订单金额</th>
+								<th>订单描述</th>
+								<th>支付方式</th>
+								<th>支付流水号</th>
+								<th>下单时间</th>
+								<th>支付时间</th>
+							</tr>
+						</thead>
+						<tbody id="order-list">
+							<tr>
+								<td>1</td>
+								<td style="color:#10a70c;">支付成功</td>
+								<td>1234567895646523</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>微支付</td>
+								<td>2546584665656323232</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>2017-05-03 12:00:00</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="layui-tab-item">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>订单状态</th>
+								<th>订单编号</th>
+								<th>商户</th>
+								<th>公众号</th>
+								<th>产品</th>
+								<th>商品</th>
+								<th>商品数量</th>
+								<th>订单金额</th>
+								<th>订单描述</th>
+								<th>支付方式</th>
+								<th>支付流水号</th>
+								<th>下单时间</th>
+								<th>支付时间</th>
+							</tr>
+						</thead>
+						<tbody id="order-list">
+							<tr>
+								<td>1</td>
+								<td style="color:#d03d36;">支付失败</td>
+								<td>1234567895646525</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>-</td>
+								<td>-</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="layui-tab-item">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>订单状态</th>
+								<th>订单编号</th>
+								<th>商户</th>
+								<th>公众号</th>
+								<th>产品</th>
+								<th>商品</th>
+								<th>商品数量</th>
+								<th>订单金额</th>
+								<th>订单描述</th>
+								<th>支付方式</th>
+								<th>支付流水号</th>
+								<th>下单时间</th>
+								<th>支付时间</th>
+							</tr>
+						</thead>
+						<tbody id="order-list">
+							<tr>
+								<td>1</td>
+								<td style="color:#999;">未支付</td>
+								<td>1234567895646524</td>
+								<td>商户1</td>
+								<td>公众号1</td>
+								<td>产品1</td>
+								<td>商品1</td>
+								<td>10000</td>
+								<td>1000000</td>
+								<td>xxxxxx</td>
+								<td>-</td>
+								<td>-</td>
+								<td>2017-05-03 11:00:00</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+	<script src="../res/plugins/layui/layui.js" charset="utf-8"></script>
+	<script>
+		layui.use(['form', 'element', 'laydate', 'layer', 'laypage'], function() {
+			var form = layui.form(),
+				element = layui.element,
+				laydate = layui.laydate,
+				layer = layui.layer,
+				laypage = layui.laypage;
+
+		})
+	</script>
+
+</html>

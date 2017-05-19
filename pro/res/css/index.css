@@ -1,0 +1,113 @@
+@charset "utf-8";
+/*初始化*/
+body,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,th,td,fieldset,input,textarea,p{margin: 0;padding: 0;}
+ul,ol{list-style: none;}
+body{font: 12px Arial,'微软雅黑';color: #333;background: #fff;line-height: 1.5;}
+h1,h2,h3,h4,h5,h6{font-size: 100%;}
+textarea{resize:none;}
+img{border: 0;vertical-align:top;display: block;}
+a{text-decoration: none;color: #333;}
+input{outline: none;}
+a:hover{color:#25ABDD;}
+i{font-style: normal;color:#BCBCBC;font-size: 8px;margin-left: 4px;}
+b{font-weight: normal;transition:all 0.2s ease;}
+/*常用的强调颜色*/
+.h{color: #E2791F !important;}
+.eg{font-family: arial;}
+/*伪类清除浮动*/
+.fl{float: left;}
+.fr{float: right;}
+.clearfix{*zoom:1;}
+.clearfix:before,.clearfix:after{content: "";display: table;}
+.clearfix:after{clear: both;}
+*{-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+/*---------------------注册页面---------------------*/
+/*占位符颜色*/
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #BBBBC1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #BBBBC1;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #BBBBC1;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #BBBBC1;
+}
+html.registerPage,.registerPage body{height: 100%;width: 100%;}
+.registerPage{background:  url(../images/mainBg.png) center center no-repeat;-webkit-background-size: 100% 100%; background-size: 100% 100%;position: relative;height:100%;}
+.registerPage .mask{position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-color:#000;background-color: rgba(36,36,57,0.85);filter:alpha(opacity=80);}
+.register-main{width: 340px;height: 430px;position: absolute;left: 50%;margin-left: -170px;top: 20%;color: #fff;}
+.register-main .header{height: 100px;line-height: 60px;display: -webkit-flex; display: -moz-flex; display: -ms-flex; display: -o-flex; display: flex;font-size: 32px;padding: 20px 0;}
+.register-main .header>div{flex:1;position: relative;}
+.register-main .header .left{padding-right: 20px;text-align: right;}
+.register-main .header .left:after{content:'';position: absolute;right: 0;height: 30px;border-right: 2px solid #fff;opacity: .5;top: 15px;}
+.register-main .header .right{padding-left: 18px;text-align: left;}
+.register-main .inputRow{position: relative;margin-bottom: 20px;}
+.register-main .inputRow input{width: 100%;height: 44px;line-height: 44px;font-size: 20px;padding-left:40px;background-color:transparent;background-color: rgba(255,255,255,.4);border: none;color: #BBBBC1;border-radius: 5px;}
+ .register-main .inputRow .inputIcon{position: absolute;left: 10px;top: 13px;} 
+.register-main .inputRow.verifyCode .verifyCodeBox{height: 44px;width: 74px;position: relative;}
+.register-main .inputRow.verifyCode .verifyCodeBox img{max-width: 100%;position: absolute;top: 0;bottom: 0;margin: auto 0;}
+.register-main .inputRow.verifyCode input{width:calc(100% - 94px);}
+.register-main .textRow{height: 44px;line-height: 44px;font-size: 18px;color: #fff;}
+.register-main .textRow .leftIcon{width: 15px;height: 15px;background:  url(../images/icon01_default.png) 0 0 no-repeat;margin-top: 14px;margin-right: 10px;cursor: pointer;}
+.register-main .textRow .leftIcon.active{background-image: url(../images/icon01_active.png);}
+.register-main .textRow .right{cursor: pointer;}
+.register-main .submitBtn{height: 54px;line-height: 54px;font-size: 24px;text-align: center;background-color: rgba(255,255,255,.4);border: 2px solid #ccc;border-radius: 5px;margin-top: 20px;}
+
+
+/*---------------------当前活动---------------------*/
+.icon {
+   width: 40px; height: 40px;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+}
+.activityPage .header{height: 60px;line-height: 60px;background-color: #E8E8E8;}
+.activityPage .header .main{width: 1080px;height: 60px;margin: 0 auto;color: #717071;font-size: 18px;}
+.activityPage .header .main .item{float: left;margin-right: 40px;}
+.activityPage .header .main .item:nth-of-type(1) .left{background-color: #F98501;}
+.activityPage .header .main .item:nth-of-type(2) .left{background-color: #DC203A;}
+.activityPage .header .main .item:nth-of-type(3) .left{background-color: #3F7AA7;}
+.activityPage .header .main .item .left{width: 20px;height: 20px;margin-right: 10px;margin-top: 19px;}
+.activityPage .body{padding-top: 30px;width: 1080px;margin: 0 auto;}
+.activityPage .activityItem{height: 220px;border-radius: 20px;box-shadow: -10px 10px 10px #eaeaea;padding-top: 20px;padding-bottom: 10px;border: 1px solid #eaeaea;padding-right: 172px;position: relative;margin-bottom: 40px;}
+/*type1样式*/
+.activityPage .activityItem.type1 .title,.activityPage .activityItem.type1 .title .right{background-color: #FB9B2E;}
+.activityPage .activityItem.type1{background:  url(../images/activityItem01Bg.png) center right no-repeat;-webkit-background-size: auto 100%;
+background-size: auto 100%;}
+.activityPage .activityItem.type1 .capabilitiesBar .icon{fill:#FB9B2E;}
+/*type2样式*/
+.activityPage .activityItem.type2 .title,.activityPage .activityItem.type2 .title .right{background-color: #DA2039;}
+.activityPage .activityItem.type2{background:  url(../images/activityItem02Bg.png) center right no-repeat;-webkit-background-size: auto 100%;
+background-size: auto 100%;}
+.activityPage .activityItem.type2 .capabilitiesBar .icon{fill:#DA2039;}
+/*type3样式*/
+.activityPage .activityItem.type3 .title,.activityPage .activityItem.type3 .title .right{background-color: #3F79A6;}
+.activityPage .activityItem.type3{background:  url(../images/activityItem03Bg.png) center right no-repeat;-webkit-background-size: auto 100%;
+background-size: auto 100%;}
+.activityPage .activityItem.type3 .capabilitiesBar .icon{fill:#3F79A6;}
+/*end*/
+.activityPage .activityItem .title{width: 340px;height: 70px;position: relative;margin-top: 20px;color: #fff;padding-left: 26px;padding-top: 6px;}
+.activityPage .activityItem .title .right{width: 70px;height: 70px;position: absolute;right: -40px;top: 0;border-radius: 0 50% 50% 0;}
+.activityPage .activityItem .title .activityName {font-size: 24px;}
+.activityPage .activityItem .title .activityTime {font-size: 16px;}
+.activityPage .activityItem .capabilitiesBar{padding: 0 50px;font-size: 16px;color: #5D5D5D;display: -webkit-flex; display: -moz-flex; display: -ms-flex; display: -o-flex; display: flex;text-align: center;margin-top: 20px;}
+.activityPage .activityItem .capabilitiesBar .item{flex:1;color: #5D5D5D;}
+.activityPage .activityItem .messageAndNumber{position: absolute;right: 226px;top: 20px;color: #717071;}
+.activityPage .activityItem .messageAndNumber .number{font-size: 44px;}
+.activityPage .activityItem .messageAndNumber .message{font-size: 18px;height: 30px;line-height: 1;}
+.activityPage .activityItem .messageAndNumber .message .left{vertical-align: top;}
+.activityPage .activityItem .messageAndNumber .message .right{vertical-align: bottom;}
+.activityPage .activityItem .messageAndNumber .message .split{display: inline-block;width: 12px;height: 30px;border-right: 1px solid #aaa;-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);margin-right: 10px;}
+/*添加活动*/
+.activityPage .addActivity{cursor: pointer;height: 220px;border-radius: 20px;box-shadow: -10px 10px 10px #eaeaea;padding-top: 46px;padding-bottom: 10px;border: 1px solid #eaeaea;position: relative;margin-bottom: 40px;text-align: center;}
+.activityPage .addActivity img{position: absolute;left: 0;right: 0;margin: 0 auto;}
+.activityPage .addActivity span{display: inline-block;margin-top: 72px;font-size: 28px;color: #CCC;}
+
+

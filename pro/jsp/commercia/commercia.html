@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商户</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../res/css/Layuiglobal.css">
+    <link rel="stylesheet" href="../../res/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+	<style>
+		.encl_box{
+			padding-top:20px;
+		}
+		.ri_btn{
+			float:right;
+			display: inline-block;
+		}
+		#demo{
+			margin-top:30px;
+		}
+		.portrait{
+			width:30px;
+			height:30px;
+			border-radius:50%;
+		}
+		table td,table th{
+			padding:9px 5px !important;
+		}
+	</style>
+	<body>
+		<div class="encl_box">
+			 <form action="" class="layui-form" style="padding:0 15px;">
+	              <div class="layui-input-inline">
+	                <select name="state" id="" lay-search>
+	                    <option value="">请选择状态</option>
+	                    <option value="0">审核通过</option>
+	                    <option value="1">审核失败</option>
+	                    <option value="2">审核中</option>
+	                </select>
+	            </div>
+	            <div class="layui-input-inline">
+	            	<input type="text" name="title"  placeholder="关键字" autocomplete="off" class="layui-input">  
+	            </div>
+	            <div class="layui-btn" lay-submit lay-filter="demo1">查询</div>
+	            
+	      </form>
+     
+        <div class="layui-field-box">
+           
+				<table class="layui-table">
+				
+				  <thead>
+				    <tr>
+				      <th style="min-width:40px;text-align: center;">No</th>
+				      <th style="min-width:100px;">账号</th>
+				      <th style="min-width:80px;">账号状态</th>
+				      <th style="min-width:70px;text-align: center;">微信头像</th>
+				      <th style="min-width:80px;">微信昵称</th>
+				      <th style="min-width:80px;">手机号</th>
+				      <th style="min-width:200px;">所在地址</th>
+				      <th style="min-width:70px;">累计充值</th>
+				      <th style="min-width:70px;">累计提现</th>
+				      <th style="min-width:70px;">累计消费</th>
+				      <th style="min-width:70px;">账户余额</th>
+				      <th style="min-width:120px;">代理商</th>
+				      <th style="min-width:100px;">创建时间</th>
+				      <th style="min-width:150px;text-align: center;">操作</th>
+				    </tr> 
+				  </thead>
+				  <tbody>
+				     <tr>
+                        <td style="text-align: center;">1</td>
+                        <td>13548756985</td>
+                        <td>审核通过</td>
+                        <td style="text-align: center;"><img src="../../res/images/gift.jpg" class="portrait"/></td>
+                        <td>一米阳光</td>
+                        <td>13514785698</td>
+                        <td>广东省深圳市福田区彩田路嘉麟豪庭C座1902</td>
+                        <td>20000</td>
+                        <td>7500</td>
+                        <td>8000</td>
+                        <td>4500</td>
+                        <td>深圳海勒集团</td>
+                        <td>2017-05-11</td>
+                        <td style="text-align: center;">
+                            <a href="commerciaEdit.html" class="layui-btn layui-btn-mini">编辑</a>
+                            <a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-mini deleteBtn">删除</a>
+                        </td>
+                    </tr>
+				     <tr>
+                        <td style="text-align: center;">1</td>
+                        <td>13548756985</td>
+                        <td>审核通过</td>
+                        <td style="text-align: center;"><img src="../../res/images/gift.jpg" class="portrait"/></td>
+                        <td>一米阳光</td>
+                        <td>13514785698</td>
+                        <td>广东省深圳市福田区彩田路嘉麟豪庭C座1902</td>
+                        <td>20000</td>
+                        <td>7500</td>
+                        <td>8000</td>
+                        <td>4500</td>
+                        <td>深圳海勒集团</td>
+                        <td>2017-05-11</td>
+                        <td style="text-align: center;">
+                            <a href="commerciaEdit.html" class="layui-btn layui-btn-mini">编辑</a>
+                            <a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-mini deleteBtn">删除</a>
+                        </td>
+                    </tr>
+				  </tbody>
+				</table>
+		
+		    <div id="demo">
+       
+    		</div> 
+        </div>
+        
+    </div>
+	</body>
+	<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../res/plugins/datas/nav.js" ></script>
+    
+    <script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+     <script>
+        layui.use(['form','layedit','laydate','layer'],function(){
+            var form = layui.form()
+            var layer = layui.layer                   
+			var layer_ = null 							//全局layer_
+            form.on('submit(demo1)', function(data){     //监听提交事件并打印
+                console.log(data)
+                layer.alert(JSON.stringify(data.field),{
+                    title:"最终提交的信息"
+                })
+                return false
+            })
+            
+			$.ajax({
+				url:"xx",
+				type:"post",
+				async:false,
+				beforeSend:function(){
+					layer_ = layer.load(1,{})
+				},
+				success:function(data){
+					layer.close(layer_)
+					
+				},
+				error:function(err){
+					layer.close(layer_)
+				}
+			})
+
+           
+            
+        })
+        
+        $(function(){
+        	 $(".deleteBtn").on("click",function(){
+        	 	var hint=confirm("确定删除此信息?");
+        	 	if(hint==true){
+        	 		$(this).parents("tr").remove();
+        	 	}else{
+        	 		return;
+        	 	}
+            	
+            });
+        });
+    </script>
+</html>

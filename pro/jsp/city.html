@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>基于 Layui form 组件的省市区联动选择的实现</title>
+<link rel="stylesheet" href="../res/plugins/layui/css/layui.css" />
+<script type="text/javascript" src="../res/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="province.js"></script>
+<script type="text/javascript">
+var defaults = {
+  s1:'province',
+  s2:'city',
+  s3:'district',
+  v1:null,
+  v2:null,
+  v3:null
+}; 
+</script>
+</head>
+<body>
+    <div style="width:900px;margin:50px auto;">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择地区</label>
+                <div class="layui-input-inline">
+                    <select name="province"  lay-filter="province" >
+                        <option value="">请选择省</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="city"  lay-filter="city">
+                        <option value="">请选择市</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="district"  lay-filter="district">
+                        <option value="">请选择县/区</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form()
+            
+            form.on("submit(demo1)",function(data){
+                console.log(data)
+                return false
+            })
+        })
+    </script>
+</body>
+</html>

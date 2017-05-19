@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产品管理</title>
+		<link rel="stylesheet" href="../../res/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../res/css/Layuiglobal.css">
+    <link rel="stylesheet" href="../../res/plugins/font-awesome/css/font-awesome.min.css">
+	</head>
+	<style>
+		.encl_box{
+			padding-top:20px;
+		}
+		.ri_btn{
+			float:right;
+			display: inline-block;
+		}
+		#demo{
+			margin-top:30px;
+		}
+		.prolist{
+			margin-top:20px;
+		}
+		.pro_block{
+			width:47%;
+			margin-left:20px;
+			background-color:#fff;
+			border:1px solid #eee;
+			overflow: hidden;
+			float:left;
+			margin-bottom:20px;
+			height:230px;
+			  display: box;              /* OLD - Android 4.4- */
+			  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+			  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+			  display: -ms-flexbox;      /* TWEENER - IE 10 */
+			  display: -webkit-flex;     /* NEW - Chrome */  
+			  display: -ms-flex;
+			  display: -o-flex;
+			  display: flex;
+			  align-items: center;
+		}
+		.pro_block:hover{
+			color:#333;
+		}
+		.proimg{
+			width:120px;
+			margin-left:30px;
+			float:left;
+			vertical-align:middle;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.proimg img{
+			display: inline-block;
+			width:100%;
+		}
+		.probos{
+			width:calc(100% - 220px);
+			line-height:24px;
+			float:left;
+			padding:30px 30px;
+		}
+		.probos dt{
+			font-weight: bold;
+			padding:4px 0;
+		}
+		.probos dd{
+			padding:4px 0;
+			 white-space: nowrap;
+		    -o-text-overflow:ellipsis; 
+		    -icab-text-overflow: ellipsis; 
+		    -khtml-text-overflow: ellipsis; 
+		    -moz-text-overflow: ellipsis; 
+		    -webkit-text-overflow: ellipsis; 
+		    text-overflow:ellipsis;
+		    overflow:hidden;
+		}
+		.color1{
+			color:green;
+		}
+		.color2{
+			color:red;
+		}
+		.color3{
+			color:#999;
+		}
+		.putaway i{
+			font-size:13px !important;
+		}
+	</style>
+	<body style="background-color:#f5f5f5;">
+     	<form action="" class="layui-form" style="padding:20px 20px 0;">
+     		 	<div class="layui-input-inline">
+	                <select name="province" lay-verify="" lay-search>
+		               	 <option value="">请选择状态</option>
+						  <option value="1">已上架</option>
+						  <option value="2">未上架</option>
+						  <option value="3">已下架</option>
+					</select>   
+	            </div>
+	           
+	            <div class="ri_btn">
+	             	<a href="goodsEdit.html" class="layui-btn layui-btn-small">
+			            <i class="layui-icon">&#xe608;</i>&nbsp;添加
+			        </a>
+					<a href="javascript:void(0)" class="layui-btn layui-btn-small upshelves" >
+			            <i class="layui-icon">&#xe62f;</i>&nbsp;上架
+			        </a>
+			        <a href="javascript:void(0)" class="layui-btn layui-btn-small downshelves">
+			            <i class="layui-icon">&#xe601;</i>&nbsp;下架
+			        </a>
+			        <a href="javascript:void(0)" class="layui-btn layui-btn-small deleteBtn" >
+			            <i class="layui-icon">&#xe640;</i>&nbsp;删除
+			        </a>
+		        </div>
+	      </form>
+        <div class="prolist layui-form"> 
+        	 <div class="pro_block" href="goodsEdit.html">
+           		<div class="proimg">
+           			<img src="../../res/images/haibaokc.jpg">
+           		</div>
+           		<dl class="probos">
+           			<dt>海报快传(ID:1)</dt>
+           			<dd>价格：<span>5000元</span></dd>
+           			<dd>商户数：<span>100</span></dd>
+           			<dd>产品状态：<span class="color1">已上架</span><span>（2017-05-10 13：13）</span></dd>
+           			<dd>商品描述：<span>海报快传是通过粉丝分享海报获取红包这种方式来达到吸粉的目的的.</span></dd>
+           		</dl>
+				<div style="height:100%;">
+					 <input type="checkbox" name="like" title="选中" value="1"> 
+				</div>
+           </div>
+           <div class="pro_block" href="goodsEdit.html">
+           		<div class="proimg">
+           			<img src="../../res/images/logo.jpg">
+           		</div>
+           		<dl class="probos">
+           			<dt>购房券</dt>
+           			<dd>价格：<span>5000元</span></dd>
+           			<dd>商户数：<span>1000</span></dd>
+           			<dd>产品状态：<span class="color3">已下架</span></dd>
+           			<dd>商品描述：<span>海报快传是通过粉丝分享海报获取红包这种方式来达到吸粉的目的的.</span></dd>
+           		</dl>
+				<div style="height:100%;">
+					 <input type="checkbox" name="like" title="选中" value="2"> 
+				</div>
+
+           </div>
+            <div>
+				<button style="width:0;height:0;" lay-submit lay-filter="submit"></button>
+			</div>
+        </div>
+	</body>
+	<script src="../../res/plugins/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../res/plugins/datas/nav.js" ></script>
+    
+    <script src='http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js'></script>
+     <script>
+        layui.use(['form','layer'],function(){
+            var form = layui.form()
+            var layer = layui.layer                   //初始化弹窗组件
+           
+           
+		   
+			form.on("submit",function(e){
+				console.log(e)
+				return false
+			})
+			form.on("select",function(e){
+				layer.msg("状态" + e.value)
+			})
+		   
+            $(".upshelves").click(function(){
+				if(slelct().length >0){
+					layer.confirm("确定要上架" + slelct() + "吗?",function(){
+						layer.msg(slelct() + "已上架")
+					})
+				}else{
+					layer.msg("请勾选要上架的产品")
+				}
+			})
+			 $(".downshelves").click(function(){
+				if(slelct().length >0){
+					layer.confirm("确定要下架" + slelct() + "吗?",function(){
+						layer.msg(slelct() + "已上架")
+					})
+				}else{
+					layer.msg("请勾选要下架的产品")
+				}
+			})
+			 $(".deleteBtn").click(function(){
+				if(slelct().length >0){
+					layer.confirm("确定要删除" + slelct() + "吗?",function(){
+						layer.msg("将删除" + slelct())
+					})
+					
+				}else{
+					layer.msg("请勾选要删除的选项")
+				}
+			})
+
+
+
+			function slelct(){
+				var data = []
+				$("[name=like]").each(function(){
+					if($(this).is(":checked")){
+						data.push($(this).val())
+					}
+				})
+				return data
+			}
+            
+        })
+        
+       /*限制字数*/
+	     /*jQuery.fn.limit=function(){
+			var self = $("[limit]");
+			self.each(function(){
+			var objString = $(this).text();
+			var objLength = $(this).text().length;
+			var num = $(this).attr("limit");
+			if(objLength > num){
+			$(this).attr("title",objString);
+			objString = $(this).text(objString.substring(0,num)+"...");
+			}
+			$(this).attr("title"," ")
+			})
+			}
+			
+			
+			$(function(){
+			$(".probos dd").attr("limit",50)
+			$("[limit]").limit();
+			})  */
+      
+    </script>
+</html>
